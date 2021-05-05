@@ -1,6 +1,26 @@
 namespace SpriteKind {
     export const wings = SpriteKind.create()
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 9 9 8 . . . . . . 
+        . . . . . . 9 8 . 8 8 . . . . . 
+        . . . . . . 9 . . . 8 6 6 8 . . 
+        . . . . . 9 8 . . . 6 6 9 8 8 . 
+        . . . . . 9 8 . 6 6 8 9 9 9 8 . 
+        . . 6 6 6 9 8 8 8 8 8 9 9 9 8 . 
+        . . 9 9 9 9 8 9 9 9 9 9 9 9 8 . 
+        . . 6 6 6 9 8 8 8 8 8 9 9 9 8 . 
+        . . . . . 9 8 . 6 6 8 9 9 9 8 . 
+        . . . . . 9 8 . . . 6 6 9 8 8 . 
+        . . . . . . 9 . . . 8 6 6 8 . . 
+        . . . . . . 9 8 . 8 8 . . . . . 
+        . . . . . . . 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, mySprite, 50, 0)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.vy == 0) {
         mySprite.vy = -200
@@ -14,6 +34,26 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.wings, function (sprite, otherSp
     mySprite.startEffect(effects.coolRadial)
     mySprite.ay = 40
     music.powerUp.playUntilDone()
+})
+controller.B.onEvent(ControllerButtonEvent.Repeated, function () {
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 9 9 8 . . . . . . 
+        . . . . . . 9 8 . 8 8 . . . . . 
+        . . . . . . 9 . . . 8 6 6 8 . . 
+        . . . . . 9 8 . . . 6 6 9 8 8 . 
+        . . . . . 9 8 . 6 6 8 9 9 9 8 . 
+        . . 6 6 6 9 8 8 8 8 8 9 9 9 8 . 
+        . . 9 9 9 9 8 9 9 9 9 9 9 9 8 . 
+        . . 6 6 6 9 8 8 8 8 8 9 9 9 8 . 
+        . . . . . 9 8 . 6 6 8 9 9 9 8 . 
+        . . . . . 9 8 . . . 6 6 9 8 8 . 
+        . . . . . . 9 . . . 8 6 6 8 . . 
+        . . . . . . 9 8 . 8 8 . . . . . 
+        . . . . . . . 9 9 8 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, mySprite, 50, 0)
 })
 function on () {
     if (vb == 1) {
@@ -31,6 +71,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, l
     music.magicWand.playUntilDone()
     vb = 1
 })
+let projectile: Sprite = null
 let vb = 0
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
@@ -183,6 +224,11 @@ scene.setBackgroundImage(img`
 tiles.placeOnRandomTile(mySprite, assets.tile`myTile7`)
 vb = 0
 tiles.placeOnRandomTile(mySprite2, assets.tile`myTile9`)
+game.onUpdate(function () {
+    if (controller.left.isPressed()) {
+        projectile.setVelocity(-50, 0)
+    }
+})
 game.onUpdate(function () {
     if (controller.left.isPressed() || mySprite.vy == 0 && mySprite.vx == 0) {
         animation.runImageAnimation(
