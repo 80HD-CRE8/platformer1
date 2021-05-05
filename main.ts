@@ -225,11 +225,6 @@ tiles.placeOnRandomTile(mySprite, assets.tile`myTile7`)
 vb = 0
 tiles.placeOnRandomTile(mySprite2, assets.tile`myTile9`)
 game.onUpdate(function () {
-    if (controller.left.isPressed()) {
-        projectile.setVelocity(-50, 0)
-    }
-})
-game.onUpdate(function () {
     if (controller.left.isPressed() || mySprite.vy == 0 && mySprite.vx == 0) {
         animation.runImageAnimation(
         mySprite,
