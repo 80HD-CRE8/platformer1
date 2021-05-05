@@ -6,17 +6,32 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         mySprite.vy = -200
     }
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite, location) {
+    game.over(false, effects.dissolve)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.wings, function (sprite, otherSprite) {
     mySprite2.destroy(effects.smiles, 500)
     mySprite.startEffect(effects.coolRadial)
-    mySprite.ay = 50
+    mySprite.ay = 40
+    music.powerUp.playUntilDone()
 })
 function on () {
-	
+    if (vb == 1) {
+        tiles.setTilemap(tilemap`level3`)
+        scene.cameraFollowSprite(mySprite)
+        tiles.placeOnRandomTile(mySprite, assets.tile`myTile7`)
+    } else if (vb == 2) {
+        game.over(true, effects.confetti)
+    } else {
+        pause(100)
+    }
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
-	
+    on()
+    music.magicWand.playUntilDone()
+    vb = 1
 })
+let vb = 0
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
 scene.setBackgroundColor(9)
@@ -166,6 +181,8 @@ scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     `)
 tiles.placeOnRandomTile(mySprite, assets.tile`myTile7`)
+vb = 0
+tiles.placeOnRandomTile(mySprite2, assets.tile`myTile9`)
 game.onUpdate(function () {
     if (controller.left.isPressed() || mySprite.vy == 0 && mySprite.vx == 0) {
         animation.runImageAnimation(
