@@ -2,7 +2,8 @@
     "name": "h21",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "mini wars": "github:80hd-cre8/mini-wars#master"
     },
     "files": [
         "main.blocks",
