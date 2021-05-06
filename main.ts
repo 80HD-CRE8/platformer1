@@ -2,24 +2,25 @@ namespace SpriteKind {
     export const wings = SpriteKind.create()
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    music.pewPew.playUntilDone()
     projectile = sprites.createProjectileFromSprite(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        . . . . . . . 9 9 8 . . . . . . 
-        . . . . . . 9 8 . 8 8 . . . . . 
-        . . . . . . 9 . . . 8 6 6 8 . . 
-        . . . . . 9 8 . . . 6 6 9 8 8 . 
-        . . . . . 9 8 . 6 6 8 9 9 9 8 . 
-        . . 6 6 6 9 8 8 8 8 8 9 9 9 8 . 
-        . . 9 9 9 9 8 9 9 9 9 9 9 9 8 . 
-        . . 6 6 6 9 8 8 8 8 8 9 9 9 8 . 
-        . . . . . 9 8 . 6 6 8 9 9 9 8 . 
-        . . . . . 9 8 . . . 6 6 9 8 8 . 
-        . . . . . . 9 . . . 8 6 6 8 . . 
-        . . . . . . 9 8 . 8 8 . . . . . 
-        . . . . . . . 9 9 8 . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `, mySprite, 50, 0)
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . 8 8 8 8 . . . 
+        . . . . . . . 8 8 9 9 9 9 8 . . 
+        . . . . 8 8 6 6 9 9 9 9 9 9 . . 
+        . . 6 6 6 6 9 9 9 9 9 9 9 9 . . 
+        . . 9 9 9 9 9 9 9 9 9 9 9 9 . . 
+        . . 6 6 8 8 6 9 9 9 9 9 9 9 . . 
+        . . . . . . 8 8 6 9 9 9 9 8 . . 
+        . . . . . . . . . 8 8 8 8 . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, mySprite, 100, 0)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.vy == 0) {
@@ -36,24 +37,48 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.wings, function (sprite, otherSp
     music.powerUp.playUntilDone()
 })
 controller.B.onEvent(ControllerButtonEvent.Repeated, function () {
-    projectile = sprites.createProjectileFromSprite(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . 9 9 8 . . . . . . 
-        . . . . . . 9 8 . 8 8 . . . . . 
-        . . . . . . 9 . . . 8 6 6 8 . . 
-        . . . . . 9 8 . . . 6 6 9 8 8 . 
-        . . . . . 9 8 . 6 6 8 9 9 9 8 . 
-        . . 6 6 6 9 8 8 8 8 8 9 9 9 8 . 
-        . . 9 9 9 9 8 9 9 9 9 9 9 9 8 . 
-        . . 6 6 6 9 8 8 8 8 8 9 9 9 8 . 
-        . . . . . 9 8 . 6 6 8 9 9 9 8 . 
-        . . . . . 9 8 . . . 6 6 9 8 8 . 
-        . . . . . . 9 . . . 8 6 6 8 . . 
-        . . . . . . 9 8 . 8 8 . . . . . 
-        . . . . . . . 9 9 8 . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, mySprite, 50, 0)
+    if (mySprite.fx == 34) {
+        music.pewPew.playUntilDone()
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . 8 8 8 8 . . . 
+            . . . . . . . 8 8 9 9 9 9 8 . . 
+            . . . . 8 8 6 6 9 9 9 9 9 9 . . 
+            . . 6 6 6 6 9 9 9 9 9 9 9 9 . . 
+            . . 9 9 9 9 9 9 9 9 9 9 9 9 . . 
+            . . 6 6 8 8 6 9 9 9 9 9 9 9 . . 
+            . . . . . . 8 8 6 9 9 9 9 8 . . 
+            . . . . . . . . . 8 8 8 8 . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, mySprite, 100, 0)
+    }
+    if (mySprite.fx == -34) {
+        music.pewPew.playUntilDone()
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . 8 8 8 8 . . . 
+            . . . . . . . 8 8 9 9 9 9 8 . . 
+            . . . . 8 8 6 6 9 9 9 9 9 9 . . 
+            . . 6 6 6 6 9 9 9 9 9 9 9 9 . . 
+            . . 9 9 9 9 9 9 9 9 9 9 9 9 . . 
+            . . 6 6 8 8 6 9 9 9 9 9 9 9 . . 
+            . . . . . . 8 8 6 9 9 9 9 8 . . 
+            . . . . . . . . . 8 8 8 8 . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, mySprite, 100, 0)
+    }
 })
 function on () {
     if (vb == 1) {
@@ -70,6 +95,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, l
     on()
     music.magicWand.playUntilDone()
     vb = 1
+})
+controller.B.onEvent(ControllerButtonEvent.Released, function () {
+	
 })
 let projectile: Sprite = null
 let vb = 0
@@ -377,7 +405,7 @@ game.onUpdate(function () {
         true
         )
     }
-})
-forever(function () {
-	
+    if (true) {
+    	
+    }
 })
